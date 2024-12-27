@@ -68,8 +68,8 @@ jobs:
         fetch-depth: 0
 
     # Install the .NET Core workload
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v4
+    - name: Install .NET Core SDK
+      uses: actions/setup-dotnet@v4.8.1
       with:
         dotnet-version: 4.8.x
 
