@@ -23,6 +23,8 @@ About this repository
 ---------------------
 This repository is for Greenshot 1.3, currently in development, but is the next planned release
 
+Changed to .net 4.8.1 and added English UK translations for app and help
+
 Releases
 --------
 
