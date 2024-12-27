@@ -172,6 +172,9 @@ ClientBin/
 *.publishsettings
 node_modules/
 orleans.codegen.cs
+installer/*.exe
+installer/innosetup/*.iss1
+*bak*
 
 # RIA/Silverlight projects
 Generated_Code/
@@ -215,3 +218,4 @@ ModelManifest.xml
 
 # Rider files
 .idea
+

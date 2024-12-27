@@ -8,6 +8,7 @@
     <ApplicationManifest>greenshot.manifest</ApplicationManifest>
 	<EmbeddedResourceUseDependentUponConvention>false</EmbeddedResourceUseDependentUponConvention>
 	<EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+	<TargetFramework>net481</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,6 +35,12 @@
     <ProjectReference Include="..\Greenshot.Base\Greenshot.Base.csproj" />
     <ProjectReference Include="..\Greenshot.Editor\Greenshot.Editor.csproj" />
     <FilesToHash Include="$(SolutionDir)$(SolutionName)\$(OutDir)\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Languages\help-en-GB.bak.html" />
+    <None Remove="Languages\language-en-GB.bak.xml" />
+    <None Remove="Languages\language-en-GB.bak.xml" />
   </ItemGroup>
 
   <ItemGroup>

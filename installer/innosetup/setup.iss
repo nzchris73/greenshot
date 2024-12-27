@@ -4,9 +4,9 @@
 #define BaseDir "..\..\src"
 #define GreenshotProjectDir "..\..\src\Greenshot"
 #define LanguagesDir "..\..\src\Greenshot\Languages"
-#define BinDir "bin\Release\net472"
-#define ReleaseDir "..\..\src\Greenshot\bin\Release\net472"
-#define PluginDir "..\..\src\Greenshot\bin\Release\net472\Plugins"
+#define BinDir "bin\Release\net481"
+#define ReleaseDir "..\..\src\Greenshot\bin\Release\net481"
+#define PluginDir "..\..\src\Greenshot\bin\Release\net481\Plugins"
 
 ; Include the scripts to install .NET Framework
 ; See https://www.codeproject.com/KB/install/dotnetfx_innosetup_instal.aspx
@@ -17,7 +17,7 @@
 #include "scripts\products\msi20.iss"
 #include "scripts\products\msi31.iss"
 #include "scripts\products\dotnetfxversion.iss"
-#include "scripts\products\dotnetfx47.iss"
+#include "scripts\products\dotnetfx48.iss"
 
 [Files]
 Source: {#ReleaseDir}\Greenshot.exe; DestDir: {app}; Components: greenshot; Flags: overwritereadonly ignoreversion replacesameversion
@@ -41,6 +41,7 @@ Source: ..\additional_files\readme.txt; DestDir: {app}; Components: greenshot; F
 ; Core language files
 Source: {#LanguagesDir}\*nl-NL*; Excludes: "*installer*,*website*"; DestDir: {app}\Languages; Components: greenshot; Flags: overwritereadonly ignoreversion replacesameversion;
 Source: {#LanguagesDir}\*en-US*; Excludes: "*installer*,*website*"; DestDir: {app}\Languages; Components: greenshot; Flags: overwritereadonly ignoreversion replacesameversion;
+Source: {#LanguagesDir}\*en-GB*; Excludes: "*installer*,*website*"; DestDir: {app}\Languages; Components: greenshot; Flags: overwritereadonly ignoreversion replacesameversion;
 Source: {#LanguagesDir}\*de-DE*; Excludes: "*installer*,*website*"; DestDir: {app}\Languages; Components: greenshot; Flags: overwritereadonly ignoreversion replacesameversion;
 
 ; Additional language files
@@ -136,11 +137,11 @@ OutputBaseFilename={#ExeName}-INSTALLER-{#Version}-UNSTABLE
 OutputDir=..\
 PrivilegesRequired=lowest
 SetupIconFile=..\..\src\Greenshot\icons\applicationIcon\icon.ico
-; Create a SHA1 signature
-; SignTool=SignTool sign /debug /fd sha1 /tr https://time.certum.pl /td sha1 $f
-; Append a SHA256 to the previous SHA1 signature (this is what as does)
-; SignTool=SignTool sign /debug /as /fd sha256 /tr https://time.certum.pl /td sha256 $f
-; SignedUninstaller=yes
+ ;Create a SHA1 signature
+ ;SignTool=SignTool sign /debug /fd sha1 /tr https://time.certum.pl /td sha1 $f
+ ;Append a SHA256 to the previous SHA1 signature (this is what as does)
+ ;SignTool=SignTool sign /debug /as /fd sha256 /tr https://time.certum.pl /td sha256 $f
+ ;SignedUninstaller=yes
 UninstallDisplayIcon={app}\{#ExeName}.exe
 Uninstallable=true
 VersionInfoCompany={#ExeName}
@@ -717,21 +718,21 @@ end;
 
 function hasDotNet() : boolean;
 begin
-	Result := netfxspversion(NetFx4x, '') >= 71;
+	Result := netfxspversion(NetFx4x, '') >= 80;
 end;
 
 // Initialize the setup
 function InitializeSetup(): Boolean;
 begin
-	// Check for .NET and install 4.7.1 if we don't have it
+	// Check for .NET and install 4.8.x if we don't have it
 	if not hasDotNet() then
 	begin
 		// Enhance installer, if needed, otherwise .NET installations won't work
 		msi20('2.0');
 		msi31('3.0');
 
-		//install .net 4.7.1
-		dotnetfx47(71);
+		//install .net 4.8.x
+		dotnetfx48(80);
 	end;
 	Result := true;
 end;
